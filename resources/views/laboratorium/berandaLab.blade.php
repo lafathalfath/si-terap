@@ -162,131 +162,38 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
     <script>
-    var map = L.map('map').setView([-2.5489, 118.0149], 5); // Koordinat Indonesia
+var map = L.map('map').setView([-2.5489, 118.0149], 5);
 
-        // Add OpenStreetMap tiles
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
+// Add OpenStreetMap tiles
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
 
-        // Example markers in Jawa Barat
-        var provinces = [
-        { name: "Aceh", coords: [4.695135, 96.749397] },
-        { name: "Sumatera Utara", coords: [3.585242, 98.675598] },
-        { name: "Sumatera Barat", coords: [-0.789275, 100.650558] },
-        { name: "Riau", coords: [0.507068, 101.447777] },
-        { name: "Jawa Barat", coords: [-6.917464, 107.619125] },
-        { name: "Jawa Tengah", coords: [-7.566298, 110.831787] },
-        { name: "Jawa Timur", coords: [-7.250445, 112.768845] },
-        { name: "Kalimantan Timur", coords: [-0.502106, 117.153709] },
-        { name: "Sulawesi Selatan", coords: [-5.147665, 119.432732] },
-        { name: "Papua", coords: [-4.269928, 138.080353] }
-        ];
+// Example markers in Jawa Barat
+var provinces = [
+    { id: 1, name: "Aceh", coords: [4.695135, 96.749397] },
+    { id: 2, name: "Sumatera Utara", coords: [3.585242, 98.675598] },
+    { id: 3, name: "Sumatera Barat", coords: [-0.789275, 100.650558] },
+    { id: 4, name: "Riau", coords: [0.507068, 101.447777] },
+    { id: 5, name: "Jawa Barat", coords: [-6.917464, 107.619125] },
+    { id: 6, name: "Jawa Tengah", coords: [-7.566298, 110.831787] },
+    { id: 7, name: "Jawa Timur", coords: [-7.250445, 112.768845] },
+    { id: 8, name: "Kalimantan Timur", coords: [-0.502106, 117.153709] },
+    { id: 9, name: "Sulawesi Selatan", coords: [-5.147665, 119.432732] },
+    { id: 10, name: "Papua", coords: [-4.269928, 138.080353] }
+];
 
-        // Add markers for each city with popups
-        provinces.forEach(city => {
-            var marker = L.marker(city.coords).addTo(map);
-            marker.bindPopup(`<b>${city.name}</b><br>Ini adalah lokasi ${city.name}.`).openPopup();
-        });
+// Add markers for each city with popups and redirect using ID
+provinces.forEach(province => {
+    var marker = L.marker(province.coords).addTo(map);
+    marker.bindPopup(`<b>${province.name}</b><br><a href='/lab-pengujian/laboratoriumview/${province.id}'>Lihat Detail</a>`);
 
-        // Data kegiatan (dummy data)
-        // const kegiatanData = [
-        //     {
-        //         no: 1,
-        //         bpsip: "BPSIP SUMSEL",
-        //         jenisLab: "Laboratorium Pengujian Kimia Tanah dan Mutu Beras",
-        //         jenisAnalisis: "Analisa Kimia Tanah Rutin dan Analisa Mutu Beras",
-        //         metodeAnalisis: "Kolorimetri/Pewarnaan",
-        //         analisis: "Tidak ada",
-        //         kompetensiPersonal: "Belum ada",
-        //         namaPelatihan: "Pelatihan Pemahaman SNI ISO/IEC 17025:2017",
-        //         waktu: "2023"
-        //     },
-        //     {
-        //         no: 2,
-        //         bpsip: "BPSIP JAWA BARAT",
-        //         jenisLab: "Laboratorium Analisa Pupuk",
-        //         jenisAnalisis: "Analisa Nitrogen dan Fosfat",
-        //         metodeAnalisis: "Spektrofotometri dan Titrasi",
-        //         analisis: "Nitrogen total, Fosfat total",
-        //         kompetensiPersonal: "Ada",
-        //         namaPelatihan: "Pelatihan Analisa Pupuk dan Tanah",
-        //         waktu: "2022"
-        //     },
-        //     {
-        //         no: 3,
-        //         bpsip: "BPSIP JAWA TIMUR",
-        //         jenisLab: "Laboratorium Mutu Pangan",
-        //         jenisAnalisis: "Analisa Kimia Pangan",
-        //         metodeAnalisis: "Kromatografi Gas dan Cair",
-        //         analisis: "Kadar Air, Protein, Lemak, dan Karbohidrat",
-        //         kompetensiPersonal: "Tidak ada",
-        //         namaPelatihan: "Pelatihan Penerapan ISO 17025",
-        //         waktu: "2021"
-        //     },
-        //     {
-        //         no: 4,
-        //         bpsip: "BPSIP SUMATERA BARAT",
-        //         jenisLab: "Laboratorium Uji Sampel Air",
-        //         jenisAnalisis: "Analisa Parameter Fisika dan Kimia Air",
-        //         metodeAnalisis: "Spektrofotometri, TDS, dan pH Meter",
-        //         analisis: "TSS, COD, BOD, dan pH",
-        //         kompetensiPersonal: "Ada",
-        //         namaPelatihan: "Pelatihan Pengendalian Mutu Air",
-        //         waktu: "2023"
-        //     },
-        //     {
-        //         no: 5,
-        //         bpsip: "BPSIP KALIMANTAN TENGAH",
-        //         jenisLab: "Laboratorium Uji Kesuburan Tanah",
-        //         jenisAnalisis: "Analisa Unsur Hara Makro dan Mikro",
-        //         metodeAnalisis: "Titrasi dan Spektrofotometri",
-        //         analisis: "Nitrogen, Fosfat, Kalium, Magnesium, dan Kalsium",
-        //         kompetensiPersonal: "Ada",
-        //         namaPelatihan: "Workshop Penilaian Kesuburan Tanah",
-        //         waktu: "2020"
-        //     }
-        // ];
+    // marker.on('click', function() {
+    //     window.location.href = `/lab-pengujian/laboratoriumview/${province.id}`;
+    // });
+});
 
-        // function filterData() {
-        //     const bpsip = document.getElementById('bpsip').value;
-        //     const year = document.getElementById('year').value;
-        //     const sipType = document.getElementById('sip-type').value;
-
-        //     const filteredData = kegiatanData.filter(item => {
-        //         return (
-        //             (bpsip === '' || item.bpsip === bpsip) &&
-        //             (year === '' || item.tahun === parseInt(year)) &&
-        //             (sipType === '' || item.type === sipType)
-        //         );
-        //     });
-
-        //     displayData(filteredData);
-        // }
-
-        // function displayData(data) {
-        //     const tableBody = document.querySelector('#kegiatan-table tbody');
-        //     tableBody.innerHTML = ''; 
-
-        //     data.forEach(item => {
-        //         const row = document.createElement('tr');
-        //         row.innerHTML = `
-        //             <td>${item.no}</td>
-        //             <td>${item.bpsip}</td>
-        //             <td>${item.jenisLab}</td>
-        //             <td>${item.jenisAnalisis}</td>
-        //             <td>${item.metodeAnalisis}</td>
-        //             <td>${item.analisis}</td>
-        //             <td>${item.kompetensiPersonal}</td>
-        //             <td>${item.namaPelatihan}</td>
-        //             <td>${item.waktu}</td>
-        //         `;
-        //         tableBody.appendChild(row);
-        //     });
-        // }
-
-        // displayData(kegiatanData);
     </script>
 @endsection
 

@@ -108,18 +108,18 @@
             <select name="ip2sip_id" id="ip2sip_id" required>
                 <option value="" disabled selected>-- Pilih IP2SIP --</option>
                 @foreach($ip2sip as $ip)
-                    <option value="{{ $ip->id }}">BSIP {{ $ip->bsip->name }} - IP2SIP {{ $ip->name }}</option>
+                    <option value="{{ $ip->id }}">BPSIP {{ $ip->bsip->name }} - IP2SIP {{ $ip->name }}</option>
                 @endforeach
             </select>
         </div>
 
         <div class="form-group">
-            <label for="luas_sip">Luas SIP</label>
+            <label for="luas_sip">Luas Standar Instrumen Pertanian</label>
             <input type="number" name="luas_sip" id="luas_sip" min="0" step="0.001" required>
         </div>
 
         <div class="form-group">
-            <label for="jumlah_sdm">Jumlah SDM</label>
+            <label for="jumlah_sdm">Jumlah Sumber Daya Manusia</label>
             <input type="number" name="jumlah_sdm" id="jumlah_sdm" min="0" required>
         </div>
 
@@ -160,7 +160,7 @@
             </div>
         </div>
 
-        <button type="submit" class="submit-button">Submit</button>
+        <button type="submit" class="submit-button">Simpan Data</button>
     </form>
 </div>
 

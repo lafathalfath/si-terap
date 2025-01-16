@@ -24,8 +24,9 @@
         border-radius: 5px;
         text-align: center;
         font-size: 1em;
-        z-index: 1000;
-        position: relative;
+        z-index: 10; /* Set z-index lebih rendah dari navbar */
+        position: sticky;
+        top: 100px; /* Sesuaikan dengan tinggi navbar agar tombol tidak tertutup */
     }
 
     .stylish-button:hover {

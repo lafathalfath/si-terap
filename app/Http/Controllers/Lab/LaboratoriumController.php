@@ -123,4 +123,12 @@ class LaboratoriumController extends Controller
         if ($lab) return back()->withErrors('failed to delete data');
         return redirect()->route('data-Lab')->with('success', 'deleted');
     }
+
+    public function showDetail($id) {
+        // $lab = Laboratorium::findOrFail($id);
+        // // if (!$lab) return back()->withErrors('data not found');
+        // return view('laboratorium.lab.detail', compact('lab'));
+        return view('laboratorium.lab.detail');
+    }
+    
 }

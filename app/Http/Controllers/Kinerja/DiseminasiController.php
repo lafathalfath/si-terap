@@ -23,12 +23,12 @@ class DiseminasiController extends Controller
 
         if ($request->bsip_id) $diseminasi = $diseminasi->where('bsip_id', $request->bsip_id);
         if ($request->tanggal) $diseminasi = $diseminasi->where('tanggal', 'LIKE', "%$request->tanggal%");
+        $diseminasi = $diseminasi->paginate(5);
         if ($request->sip_id) $diseminasi = $diseminasi->whereHas('sip', function ($query) use ($request) {
             $query->where('sip_id', $request->sip_id);
         });
         if ($request->jenis_standard_id) $diseminasi = $diseminasi->where('jenis_standard_id', $request->jenis_standard_id);
 
-        $diseminasi = $diseminasi->get();
 
         $jumlah_sasaran = Diseminasi::sum('jumlah_sasaran');
         $bsip = mBSIP::whereHas('diseminasi')->get();

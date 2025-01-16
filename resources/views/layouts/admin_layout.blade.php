@@ -14,21 +14,11 @@
         }
 
         nav {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; /* Atur jarak antar objek secara proporsional */
-            /* align-items: stretch; Pastikan elemen memenuhi lebar container */
-            width: auto;
-            height: 100vh; /* Sesuaikan dengan tinggi layar */
-            background-color: #00452C;
-            overflow-y: auto;
-            padding: 20px 0; /* Tambahkan padding untuk memberi ruang */
-            position: relative;
-            flex-direction: column;
-            white-space: nowrap; /* Mencegah teks memotong */
-            /* overflow: hidden; Sembunyikan teks jika terlalu panjang */
-            text-overflow: ellipsis; /* Tambahkan "..." jika teks terpotong */
-            padding: 10px 0;
+        width: 300px; /* Perbesar sesuai kebutuhan, misalnya 300px */
+        min-width: 250px; /* memastikan minimal ukuran cukup untuk konten */
+        background-color: #00452C;
+        padding: 20px 0;
+        overflow-y: auto;
         }
 
         nav > div {
@@ -89,9 +79,13 @@
             gap: 20px; 
         }
 
-        img {
-            width: 100%;
+            img {
+        width: 120px; /* Sesuaikan ukuran ini sesuai kebutuhan */
+        height: auto; /* Agar proporsi gambar tetap terjaga */
+        margin: 0 auto; /* Untuk memusatkan gambar (opsional) */
+        display: block; /* Agar lebih mudah diatur */
         }
+
 
         button.nav-item {
             width: 100%;
@@ -149,7 +143,7 @@
         <div>
             <div>
                 <a href="{{ route('home') }}">
-                    <img src="/storage/cms/logo_light.png" alt="app logo">
+                    <img src="/assets/img/logo_bsip.png" alt="app logo">
                 </a>
             </div>
             <br>

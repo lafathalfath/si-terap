@@ -37,7 +37,7 @@
 
 <div class="profile-container">
     <!-- Judul -->
-    <h1 class="profile-title">SISTEM INFORMASI INSTALASI PENELITIAN DAN PENGKAJIAN TEKNOLOGI PERTANIAN (IP2TP) LINGKUP BBPSIP</h1>
+    <h1 class="profile-title">SISTEM INFORMASI INSTALASI PENELITIAN DAN PENGKAJIAN STANDAR INSTRUMEN PERTANIAN (IP2SIP) LINGKUP BPSIP</h1>
 
     <!-- Foto -->
     <img src="{{ asset('assets/img/bsip-21.jpg') }}" alt="Foto BBPSIP" class="profile-image">

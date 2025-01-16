@@ -17,8 +17,6 @@ return new class extends Migration
             $table->unsignedDouble('luas_sip');
             $table->unsignedInteger('jumlah_sdm');
             $table->string('agro_ekosistem');
-            $table->string('nomor_sertifikat');
-            $table->string('pj_sertifikat');
             $table->timestamps();
             
             $table->foreign('ip2sip_id')->references('id')->on('m_ip2sip');

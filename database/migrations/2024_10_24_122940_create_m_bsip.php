@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->bigInteger('provinsi_id')->unsigned()->unique();
-            $table->text('alamat')->unique();
+            $table->string('alamat', 255)->unique();
+
             $table->timestamps();
 
             $table->foreign('provinsi_id')->references('id')->on('m_provinsi');

@@ -10,7 +10,7 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
             font-family: 'Poppins', sans-serif;
             color: #333;
-            margin-bottom: 50px; 
+            margin-bottom: 50px;
         }
 
         .form-title {
@@ -82,7 +82,6 @@
             <!-- Bagian Nama BPSIP -->
             <div class="form-group">
                 <label for="nama_bpsip">Nama BPSIP</label>
-                {{-- <input type="text" name="nama_bpsip" id="nama_bpsip" placeholder="Masukkan nama BPSIP" required> --}}
                 <select id="nama_bpsip" name="bsip_id" required>
                     <option value="" selected disabled>-- Pilih BSIP --</option>
                     @foreach ($bsip as $bs)
@@ -94,7 +93,6 @@
             <!-- Bagian Jenis Laboratorium -->
             <div class="form-group">
                 <label for="jenis_lab">Jenis Laboratorium</label>
-                {{-- <input type="text" name="jenis_lab" id="jenis_lab" placeholder="Masukkan jenis laboratorium" required> --}}
                 <select name="jenis_lab_id" id="jenis_lab" required>
                     <option value="" selected disabled>-- Pilih Jenis Laboratorium --</option>
                     @foreach ($jenis_lab as $jb)
@@ -139,6 +137,51 @@
                         <option value="{{ $year }}">{{ $year }}</option>
                     @endfor
                 </select>
+            </div>
+
+            <!-- Akreditasi -->
+            <div class="form-section-title">Akreditasi</div>
+            <div class="form-group">
+                <label for="masa_berlaku">Masa Berlaku</label>
+                <input type="text" name="masa_berlaku" id="masa_berlaku" placeholder="Masukkan masa berlaku akreditasi" required>
+            </div>
+            <div class="form-group">
+                <label for="no_akreditasi">No Akreditasi</label>
+                <input type="text" name="no_akreditasi" id="no_akreditasi" placeholder="Masukkan nomor akreditasi" required>
+            </div>
+
+            <!-- Sarana dan Prasarana Laboratorium -->
+            <div class="form-section-title">Sarana dan Prasarana Laboratorium</div>
+            <div class="form-group">
+                <label for="gedung">Jumlah Gedung</label>
+                <input type="number" name="jumlah_gedung" id="gedung" placeholder="Masukkan jumlah gedung" required>
+            </div>
+            <div class="form-group">
+                <label for="memadai">Gedung Memadai</label>
+                <select name="gedung_memadai" id="memadai" required>
+                    <option value="" disabled selected>-- Pilih Status Gedung --</option>
+                    <option value="Ya">Ya</option>
+                    <option value="Tidak">Tidak</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="jenis_peralatan">Jenis Peralatan</label>
+                <textarea name="jenis_peralatan" id="jenis_peralatan" rows="3" placeholder="Masukkan jenis peralatan yang dimiliki" required></textarea>
+            </div>
+
+            <!-- Kontak -->
+            <div class="form-section-title">Kontak</div>
+            <div class="form-group">
+                <label for="foto_lab">Foto Laboratorium</label>
+                <input type="file" name="foto_lab" id="foto_lab" required>
+            </div>
+            <div class="form-group">
+                <label for="alamat_lab">Alamat Laboratorium</label>
+                <textarea name="alamat_lab" id="alamat_lab" rows="3" placeholder="Masukkan alamat laboratorium" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="telepon_lab">Nomor Telepon Laboratorium</label>
+                <input type="text" name="telepon_lab" id="telepon_lab" placeholder="Masukkan nomor telepon" required>
             </div>
 
             <!-- Tombol Submit -->

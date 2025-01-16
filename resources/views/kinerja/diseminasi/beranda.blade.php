@@ -80,12 +80,21 @@
     }
 
     .infographics {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-        margin: 30px 0;
-        margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Membagi grid menjadi 3 kolom */
+    gap: 20px; /* Jarak antar card */
+    margin: 30px 0;
     }
+
+    .card {
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
 
     .infographic {
         text-align: center;
@@ -145,24 +154,24 @@
     }
 
     .stylish-button {
-        display: block !important;
-        width: fit-content;
-        margin: 10px auto;
-        padding: 10px 20px;
-        color: white;
-        background-color: #006633;
-        text-decoration: none;
-        border-radius: 5px;
-        text-align: center;
-        font-size: 1em;
-        z-index: 1000;
-        position: relative;
+    display: block !important;
+    width: fit-content;
+    margin: 10px auto;
+    padding: 10px 20px;
+    color: white;
+    background-color: #006633;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1em;
+    z-index: 10; /* Set z-index lebih rendah dari navbar */
+    position: sticky;
+    top: 100px; /* Sesuaikan dengan tinggi navbar agar tombol tidak tertutup */
     }
 
     .stylish-button:hover {
         background-color: #009144;
     }
-
     .stylish-content {
         margin: 0 auto;
         max-width: 1200px;
@@ -201,6 +210,62 @@
     .highcharts-background{
         fill: #f4f4f4 !important;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5) !important; 
+    }
+    .icon img {
+        width: 50px; 
+        height: 50px; 
+        margin: 0 auto; 
+        display: block; 
+    }
+    .paginate-item {
+        border: 1px solid gray;
+        border-radius: 3px;
+        padding: 0 5px;
+        text-decoration: none;
+        color: black;
+    }
+
+    .paginate-item:hover {
+        border: 1px solid gray;
+        background-color: lightgray;
+        border-radius: 3px;
+        padding: 0 5px;
+        text-decoration: none;
+        color: black;
+    }
+    
+    .paginate-button {
+        /* border: 1px solid black; */
+        background-color: #3d943d;
+        color: white;
+        padding: 0 5px;
+        text-decoration: none;
+        border: 0px solid gray;
+        border-radius: 3px;
+    }
+
+    .paginate-button:hover {
+        /* border: 1px solid black; */
+        background-color: #51ac51;
+        color: white;
+        padding: 0 5px;
+        text-decoration: none;
+        border: 0px solid gray;
+        border-radius: 3px;
+    }
+    
+    .disabled-paginate {
+        pointer-events: none;
+        background-color: #cacaca;
+        color: white;
+        border: none;
+    }
+    
+    .active-paginate {
+        pointer-events: none;
+        background-color: #00452C;
+        color: white;
+        border: none;
     }
 </style>
 
@@ -338,8 +403,7 @@
                 <tbody>
                     @foreach ($diseminasi as $ds)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $ds->bsip->name }}</td>
+                        <td class="number">{{ $loop->iteration + ( $diseminasi->currentPage() - 1 ) * $diseminasi->perPage() }}</td>                             <td>{{ $ds->bsip->name }}</td>
                             <td>{{ $ds->tanggal }}</td>
                             <td>
                                 <ul>
@@ -362,42 +426,61 @@
                 </tbody>
             </table>
 
+            {{-- {{ dd(request()->table) }} --}}
+            {{-- pagination --}}
+            <div style="margin: 10px;display:flex;align-items:center;justify-content:center;gap: 5px;">
+                <a href="{{ route('kinerja.diseminasi.store', [...request()->all(), 'page' => 1]) }}" class="paginate-button {{ $diseminasi->currentPage() == 1 ? 'disabled-paginate' : '' }}">First</a>
+                <a href="{{ route('kinerja.diseminasi.store', [...request()->all(), 'page' => $diseminasi->currentPage() - 1]) }}" class="paginate-button {{ $diseminasi->currentPage() == 1 ? 'disabled-paginate' : '' }}"><<</a>
+                @php
+                    $start = ($diseminasi->currentPage() - 1) * $diseminasi->perPage();
+                @endphp
+                @for ($i = 1; $i <= $diseminasi->lastPage(); $i++)
+                    @if ($i > $diseminasi->currentPage() - 5 && $i < $diseminasi->currentPage() + 5)
+                        <a href="{{ route('kinerja.diseminasi.store', [...request()->all(), 'page' => $i]) }}" class="paginate-item {{ $diseminasi->currentPage() == $i ? 'active-paginate' : '' }}">{{ $i }}</a>
+                    @endif
+                @endfor
+                <a href="{{ route('kinerja.diseminasi.store', [...request()->all(), 'page' => $diseminasi->currentPage() + 1]) }}" class="paginate-button {{ $diseminasi->currentPage() == $diseminasi->lastPage() ? 'disabled-paginate' : '' }}">>></a>
+                <a href="{{ route('kinerja.diseminasi.store', [...request()->all(), 'page' => $diseminasi->lastPage()]) }}" class="paginate-button {{ $diseminasi->currentPage() == $diseminasi->lastPage() ? 'disabled-paginate' : '' }}">Last</a>
+            </div>
+            {{--  end pagination --}}
+
             <h3>Standar Instrumen Pertanian yang didiseminasikan</h3>
                 <div class="infographics">
-                    <div class="infographic">
+                    <div class="card">
                         <h2>Tanaman Pangan (TP)</h2>
                         <div class="icon"><i class="fas fa-seedling"></i></div>
                         <p>Jumlah SNI: {{ $standard->tp }}</p> 
                         <p>Kelompok SNI: 5</p> 
                     </div>
-                    <div class="infographic">
+                    <div class="card">
                         <h2>Hortikultura (Horti)</h2>
                         <div class="icon"><i class="fas fa-carrot"></i></div>
                         <p>Jumlah SNI: {{ $standard->horti }}</p>
                         <p>Kelompok SNI: 3</p>
                     </div>
-                    <div class="infographic">
+                    <div class="card">
                         <h2>Perkebunan (Bun)</h2>
                         <div class="icon"><i class="fas fa-apple-alt"></i></div>
                         <p>Jumlah SNI: {{ $standard->bun }}</p>
                         <p>Kelompok SNI: 2</p>
                     </div>
-                    <div class="infographic">
+                    <div class="card">
                         <h2>Peternakan (Nak)</h2>
                         <div class="icon"><i class="fas fa-regular fa-cow"></i></div>
                         <p>Jumlah SNI: {{ $standard->nak }}</p>
                         <p>Kelompok SNI: 4</p>
                     </div>
-                    <div class="infographic">
+                    <div class="card">
                         <h2>Agroinput</h2>
                         <div class="icon"><i class="fa-solid fa-leaf"></i></div>
                         <p>Jumlah SNI: {{ $standard->agroinput }}</p>
                         <p>Kelompok SNI: 2</p>
                     </div>
-                    <div class="infographic">
+                    <div class="card">
                         <h2>Pasca Panen (Paspa)</h2>
-                        <div class="icon"><i class="fas fa-sharp-duotone fa-regular fa-tractor"></i></div>
-                        <p>Jumlah SNI: {{ $standard->paspa }}</p>
+                        <div class="icon">
+                            <img src="/assets/img/planting.png" alt="Icon Pasca Panen" style="width: 50px; height: 50px;">
+                        </div>                          <p>Jumlah SNI: {{ $standard->paspa }}</p>
                         <p>Kelompok SNI: 6</p>
                     </div>
                 </div>
