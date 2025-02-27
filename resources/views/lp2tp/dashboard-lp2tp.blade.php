@@ -199,27 +199,27 @@
 </div>
 
 <div class="container profil-section">
-    <h1>SISTEM INFORMASI INSTALASI PENELITIAN DAN PENGKAJIAN TEKNOLOGI PERTANIAN (IP2TP) LINGKUP BBPSIP</h1>
+    <h1>SISTEM INFORMASI INSTALASI PENELITIAN DAN PENGKAJIAN STANDAR INSTRUMEN PERTANIAN (IP2SIP) LINGKUP BPSIP</h1>
     <div class="row">
         <div style="max-width: 400px; overflow: hidden;">
             <img src="/assets/img/gedung-bsip.jpg" alt="Gambar BBPSIP">
         </div>
         <div style="max-width: 600px;">
             <p class="description">
-                BBPSIP (Balai Besar Penerapan Standar Instrumen Pertanian), yang sebelumnya bernama BBP2TP (Balai Besar Pengkajian dan Pengembangan Teknologi Pertanian),
+                BPSIP (Balai Besar Penerapan Standar Instrumen Pertanian), yang sebelumnya bernama BBP2TP (Balai Besar Pengkajian dan Pengembangan Teknologi Pertanian),
                 adalah UPT di bawah Badan Standardisasi Instrumen Pertanian, Kementerian Pertanian yang bertugas mengelola Kebun Percobaan di berbagai wilayah sebagai
                 sarana pengkajian dan pengembangan teknologi pertanian.
             </p>
             <div class="stats">
                 <div>
                     <h3>60</h3>
-                    <p>IP2TP</p>
-                    <p>(tersebar di 28 BBPSIP)</p>
+                    <p>IP2SIP</p>
+                    <p>(tersebar di 28 BPSIP)</p>
                 </div>
                 <div>
                     <h3>2.569,47</h3>
                     <p>hektar</p>
-                    <p>Luas KP Lingkup BBPSIP</p>
+                    <p>Luas KP Lingkup BPSIP</p>
                 </div>
                 <div>
                     <h3>307</h3>
@@ -249,40 +249,40 @@
         // property by default. See API docs for 'joinBy' for more info on linking
         // data and map.
         const data = [
-            { id: 1,'hc-key': 'id-ac', value: 11, name: 'Aceh' },
-            { id: 10,'hc-key': 'id-jt', value: 12, name: 'Jawa Tengah' },
-            { id: null,'hc-key': 'id-be', value: 13, name: 'Bengkulu' },
-            { id: 13,'hc-key': 'id-bt', value: 14, name: 'Banten' },
-            { id: 16,'hc-key': 'id-kb', value: 15, name: 'Kalimantan Barat' },
-            { id: 8,'hc-key': 'id-bb', value: 16, name: 'Bangka Belitung' },
-            { id: null,'hc-key': 'id-ba', value: 17, name: 'Bali' },
-            { id: 12,'hc-key': 'id-ji', value: 18, name: 'Jawa Timur' },
-            { id: 18,'hc-key': 'id-ks', value: 19, name: 'Kalimantan Selatan' },
-            { id: 15,'hc-key': 'id-nt', value: 20, name: 'Nusa Tenggara Timur' },
-            { id: 22,'hc-key': 'id-se', value: 21, name: 'Sulawesi Selatan' },
-            { id: null,'hc-key': 'id-kr', value: 22, name: 'Kepulauan Riau' },
-            { id: 28,'hc-key': 'id-ib', value: 23, name: 'Papua Barat' },
-            { id: 2,'hc-key': 'id-su', value: 24, name: 'Sumatera Utara' },
-            { id: 4,'hc-key': 'id-ri', value: 25, name: 'Riau' },
-            { id: 20,'hc-key': 'id-sw', value: 26, name: 'Sulawesi Utara' },
-            { id: null,'hc-key': 'id-ku', value: 27, name: 'Kalimantan Utara' },
-            { id: 27,'hc-key': 'id-la', value: 28, name: 'Maluku Utara' },
-            { id: 3,'hc-key': 'id-sb', value: 29, name: 'Sumatera Barat' },
-            { id: 26,'hc-key': 'id-ma', value: 30, name: 'Maluku' },
-            { id: 14,'hc-key': 'id-nb', value: 31, name: 'Nusa Tenggara Barat' },
-            { id: 23,'hc-key': 'id-sg', value: 32, name: 'Sulawesi Tenggara' },
-            { id: 21,'hc-key': 'id-st', value: 33, name: 'Sulawesi Tengah' },
-            { id: 29,'hc-key': 'id-pa', value: 34, name: 'Papua' },
-            { id: 9,'hc-key': 'id-jr', value: 35, name: 'Jawa Barat' },
-            { id: 19,'hc-key': 'id-ki', value: 36, name: 'Kalimantan Timur' },
-            { id: 7,'hc-key': 'id-1024', value: 37, name: 'Lampung' },
-            { id: null,'hc-key': 'id-jk', value: 38, name: 'Jakarta' },
-            { id: 24,'hc-key': 'id-go', value: 39, name: 'Gorontalo' },
-            { id: 11,'hc-key': 'id-yo', value: 40, name: 'Yogyakarta' },
-            { id: 6,'hc-key': 'id-sl', value: 41, name: 'Sumatera Selatan' },
-            { id: 25,'hc-key': 'id-sr', value: 42, name: 'Sulawesi Barat' },
-            { id: 5,'hc-key': 'id-ja', value: 43, name: 'Jambi' },
-            { id: 17,'hc-key': 'id-kt', value: 44, name: 'Kalimantan Tengah' }
+            { id: 1,'hc-key': 'id-ac', value: 2, name: 'Aceh' },
+            { id: 10,'hc-key': 'id-jt', value: 3, name: 'Jawa Tengah' },
+            { id: null,'hc-key': 'id-be', value: 0, name: 'Bengkulu' },
+            { id: 13,'hc-key': 'id-bt', value: 1, name: 'Banten' },
+            { id: 16,'hc-key': 'id-kb', value: 3, name: 'Kalimantan Barat' },
+            { id: 8,'hc-key': 'id-bb', value: 3, name: 'Bangka Belitung' },
+            { id: null,'hc-key': 'id-ba', value: 0, name: 'Bali' },
+            { id: 12,'hc-key': 'id-ji', value: 2, name: 'Jawa Timur' },
+            { id: 18,'hc-key': 'id-ks', value: 4, name: 'Kalimantan Selatan' },
+            { id: 15,'hc-key': 'id-nt', value: 4, name: 'Nusa Tenggara Timur' },
+            { id: 22,'hc-key': 'id-se', value: 4, name: 'Sulawesi Selatan' },
+            { id: null,'hc-key': 'id-kr', value: 0, name: 'Kepulauan Riau' },
+            { id: 28,'hc-key': 'id-ib', value: 3, name: 'Papua Barat' },
+            { id: 2,'hc-key': 'id-su', value: 2, name: 'Sumatera Utara' },
+            { id: 4,'hc-key': 'id-ri', value: 2, name: 'Riau' },
+            { id: 20,'hc-key': 'id-sw', value: 2, name: 'Sulawesi Utara' },
+            { id: null,'hc-key': 'id-ku', value: 0, name: 'Kalimantan Utara' },
+            { id: 27,'hc-key': 'id-la', value: 1, name: 'Maluku Utara' },
+            { id: 3,'hc-key': 'id-sb', value: 4, name: 'Sumatera Barat' },
+            { id: 26,'hc-key': 'id-ma', value: 1, name: 'Maluku' },
+            { id: 14,'hc-key': 'id-nb', value: 3, name: 'Nusa Tenggara Barat' },
+            { id: 23,'hc-key': 'id-sg', value: 2, name: 'Sulawesi Tenggara' },
+            { id: 21,'hc-key': 'id-st', value: 1, name: 'Sulawesi Tengah' },
+            { id: 29,'hc-key': 'id-pa', value: 2, name: 'Papua' },
+            { id: 9,'hc-key': 'id-jr', value: 2, name: 'Jawa Barat' },
+            { id: 19,'hc-key': 'id-ki', value: 2, name: 'Kalimantan Timur' },
+            { id: 7,'hc-key': 'id-1024', value: 3, name: 'Lampung' },
+            { id: null,'hc-key': 'id-jk', value: 0, name: 'Jakarta' },
+            { id: 24,'hc-key': 'id-go', value: 1, name: 'Gorontalo' },
+            { id: 11,'hc-key': 'id-yo', value: 1, name: 'Yogyakarta' },
+            { id: 6,'hc-key': 'id-sl', value: 4, name: 'Sumatera Selatan' },
+            { id: 25,'hc-key': 'id-sr', value: 0, name: 'Sulawesi Barat' },
+            { id: 5,'hc-key': 'id-ja', value: 1, name: 'Jambi' },
+            { id: 17,'hc-key': 'id-kt', value: 1, name: 'Kalimantan Tengah' }
         ];
 
         // Create the chart
@@ -300,7 +300,7 @@
 
             colorAxis: {
                 min: 0,
-                max: 75, // Rentang nilai data
+                max: 5, // Rentang nilai data
                 stops: [
                     [0, '#95be95'],     // tipis
                     [0.5, '#4c924c'],   // tengah
@@ -346,28 +346,15 @@
     </script>
 </div>
 
-<div class="content-slider container mt-5">
-    <h1 class="text-center mb-4">Profil Instalasi Penelitian dan Pengkajian Teknologi Pertanian</h1>
-    <div id="contentCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <!-- Slide 1 -->
-            <div class="carousel-item active">
-                <div class="row align-items-center">
-                    <div class="col-md-8">
-                        <p class="text-justify">
-                            Sejarah singkat asal usul Kebun Percobaan ini berawal dari adanya proyek IDAP (1976-1986) kerja sama Indonesia dengan Kerajaan Belanda. Pada tahun 1980 masyarakat petani kopi di Aceh Tengah tergantung kehidupannya pada komoditi kopi sementara produksi hanya 500 kg/hektar dalam setahun. Selain itu, mutu kopi juga masih rendah akibat tidak adanya proses pengolahan yang baik. Pada tahun 1984 dibangun pabrik pengolahan kopi arabika dengan kapasitas 15 ton kopi glondong per hari untuk meningkatkan kualitas mutu kopi sehingga dapat meningkatkan pendapatan masyarakat sekitar.
-                        </p>
-                        <p class="text-justify">
-                            Kemudian Balai Pengkajian Teknologi Pertanian (BPTP) NAD kembali mengubah namanya menjadi Kebun Percobaan (KP) Gayo hingga sekarang. Luas Kebun Percobaan ini sekitar 18 hektar, terdiri dari bangunan perkantoran, gedung Lab, perumahan, dan kebun kopi sertifikasi. Fasilitas tersebut digunakan untuk penelitian, pembibitan, serta pengembangan Flasma Nutfah Varitas kopi arabika.
-                        </p>
-                    </div>
-                    <div class="col-md-4 text-center">
-                        <img src="/assets/img/kp-gayo.jpg" class="img-fluid rounded" alt="KP Gayo">
-                        <p class="mt-2 text-center text-warning">
-                            <b>📍 KP Gayo (Aceh)</b><br> Kepala IP2TP Gayo - Bardi Ali, S.Pt
-                        </p>
-                    </div>
-                </div>
+<div class="container profil-section">
+    <h1>Profil Instalasi Penelitian dan Pengkajian Standar Instrumen Pertanian KP.Gayo</h1>
+        <div class="row">
+            <div style="max-width: 400px; overflow: hidden;">
+                <img src="/assets/img/kp-gayo.jpg" alt="Gambar BBPSIP">
+                <p class="mt-2 text-center text-warning">
+                    <b><span style="color: black;">📍 KP Aceh </span></b><br> 
+                    <span style="color: green;">Kepala IP2SIP Aceh - Andi Supriyanto, S.Pt</span>
+                </p>
             </div>
             <div style="max-width: 600px;">
                 <p class="description">

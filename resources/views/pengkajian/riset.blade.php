@@ -113,11 +113,12 @@
                 </select>
             </div>
             {{-- <div class="form-group">
-                <label for="tahun">Tahun</label>
-                <select id="tahun" name="tahun">
-                    <option value="all">All</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
+                <label for="komoditas">Komoditas</label>
+                <select id="komoditas" name="komoditas_id">
+                    <option value="">All</option>
+                    @foreach ($komoditas as $kd)
+                        <option value="{{ $kd->id }}" {{ request()->komoditas_id == $kd->id ? 'selected' : '' }}>{{ $kd->name }}</option>
+                    @endforeach
                 </select>
             </div> --}}
             <div class="form-group">
@@ -162,6 +163,7 @@
                     <th>No</th>
                     <th>Judul Pengkajian Spesifik Lokasi</th>
                     <th>Sub Sektor</th>
+                    <th>Komoditas</th>
                     <th>Tahun</th>
                     <th>Provinsi</th>
                     <th>Kabupaten</th>
@@ -174,6 +176,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $rs->judul }}</td>
                         <td>{{ $rs->sip->name }}</td>
+                        <td>{{ $rs->komoditas->name }}</td>
                         <td>{{ $rs->tahun }}</td>
                         <td>{{ $rs->kecamatan->kabupaten->provinsi->name }}</td>
                         <td>{{ $rs->kecamatan->kabupaten->name }}</td>
@@ -195,12 +198,12 @@
             inputKabupaten.value = ''
             inputKecamatan.value = ''
         }
-        
+
         const handleFilterKabupaten = () => {
             inputProvinsi.value = ''
             inputKecamatan.value = ''
         }
-        
+
         const handleFilterKecamatan = () => {
             inputProvinsi.value = ''
             inputKabupaten.value = ''

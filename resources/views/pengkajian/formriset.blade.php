@@ -70,6 +70,11 @@
             </div>
 
             <div class="form-group">
+                <label for="komoditas">Komoditas</label>
+                <input type="text" id="komoditas" name="komoditas" placeholder="Masukkan komoditas" required>
+            </div>
+
+            <div class="form-group">
                 <label for="tahun">Tahun</label>
                 <select id="tahun" name="tahun" required>
                     <option value="" selected disabled>-- Pilih Tahun --</option>

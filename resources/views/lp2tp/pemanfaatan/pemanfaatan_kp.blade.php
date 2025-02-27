@@ -65,44 +65,14 @@
             <hr>
             
             <div class="d-flex align-items-center justify-content-between">
-              <form class="w-75 d-flex align-items-center gap-2 mb-3">
-                     <!-- Filter Section -->
+              <form action="{{ route('lp2tp.pemanfaatan_kp') }}" class="w-75 d-flex align-items-center gap-2 mb-3">
+                  <!-- Filter Section -->
                   <div class="filter-container">
-                      <select id="bpsip" placeholder="BPTP">
-                          <option value="">BPTP</option>
-                          <option value="aceh">Aceh</option>
-                          <option value="sumut">Sumatera Utara</option>
-                          <option value="sumbar">Sumatera Barat</option>
-                          <option value="riau">Riau</option>
-                          <option value="kepri">Kepulauan Riau</option>
-                          <option value="jambi">Jambi</option>
-                          <option value="sumsel">Sumatera Selatan</option>
-                          <option value="bengkulu">Bengkulu</option>
-                          <option value="babel">Bangka Belitung</option>
-                          <option value="lampung">Lampung</option>
-                          <option value="banten">Banten</option>
-                          <option value="jakarta">DKI Jakarta</option>
-                          <option value="jabar">Jawa Barat</option>
-                          <option value="jateng">Jawa Tengah</option>
-                          <option value="yogyakarta">Yogyakarta</option>
-                          <option value="jatim">Jawa Timur</option>
-                          <option value="kalbar">Kalimantan Barat</option>
-                          <option value="kalteng">Kalimantan Tengah</option>
-                          <option value="kaltim">Kalimantan Timur</option>
-                          <option value="kalsel">Kalimantan Selatan</option>
-                          <option value="bali">Bali</option>
-                          <option value="ntb">Nusa Tenggara Barat</option>
-                          <option value="ntt">Nusa Tenggara Timur</option>
-                          <option value="sulut">Sulawesi Utara</option>
-                          <option value="gorontalo">Gorontalo</option>
-                          <option value="sulteng">Sulawesi Tengah</option>
-                          <option value="sultra">Sulawesi Tenggara</option>
-                          <option value="sulsel">Sulawesi Selatan</option>
-                          <option value="sulbar">Sulawesi Barat</option>
-                          <option value="malut">Maluku Utara</option>
-                          <option value="maluku">Maluku</option>
-                          <option value="papbar">Papua Barat</option>
-                          <option value="papua">Papua</option>
+                      <select id="bpsip" name="bsip_id">
+                          <option selected disabled>BPSIP</option>
+                          @foreach ($all_bsip as $item)
+                            <option value="{{ $item->id }}" {{ request()->bsip_id == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+                          @endforeach
                       </select>
                       
                       <button type="submit" class="btn btn-success">Cari</button>
@@ -116,7 +86,7 @@
                   </a>
                   <a  class="btn btn-success">
                     <i class="fa-solid fa-file-excel"></i>&ensp;
-                    Import Excel
+                    Export Excel
                 </a>
               </div>
           </div>
@@ -128,18 +98,34 @@
                 <table class="table table-bordered">
                     <tr>
                       <th>No</th>
-                      <th>BPTP/KP</th>
+                      <th>BPSIP</th>
                       <th>Luas IP2SIP (Ha)</th>
                       <th>Agroekosistem</th>
                       <th>Pengkajian/Diseminasi</th>
                     </tr>
                     <tr>
-                      <td>1</td>
-                      <td> <a href="{{ route('lp2tp_detail') }}" style="text-decoration: none; color: inherit;">Aceh KP. Gayo</a></td>
-                      <td>18,88</td>
-                      <td>Lahan Kering Dataran Tinggi</td>
-                      <td>1. Pengkajian<br>2. Plasma Nutfah<br>3. Kebun Produksi<br>4. Visitor Plot</td>
+                      <tr>
+                        @foreach ($pemanfaatan_sip as $item)
+                            <tr> <!-- Buat baris baru untuk setiap item -->
+                                <td>{{ $loop->iteration }}</td>
+                                <td>
+                                    <a href="{{ route('lp2tp_detail', $item->id) }}" style="text-decoration: none; color: inherit;">
+                                        {{ $item->ip2sip->bsip->name }}/KP. {{ $item->ip2sip->name }}
+                                    </a>
+                                </td>
+                                <td>{{ $item->luas_sip }}</td>
+                                <td>{{ $item->agro_ekosistem }}</td>
+                                <td>
+                                    <ol>
+                                        @foreach ($item->pemanfaatan_diseminasi as $pd)
+                                            <li>{{ $pd->name }}</li>
+                                        @endforeach
+                                    </ol>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tr>
+                    
                   </table>
 
                 <nav aria-label="...">

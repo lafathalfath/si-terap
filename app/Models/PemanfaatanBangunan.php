@@ -12,7 +12,7 @@ class PemanfaatanBangunan extends Model
     protected $table = 'pemanfaatan_bangunan';
     protected $guarded = [];
 
-    public function pemanfaatan_sip() : BelongsTo {
-        return $this->belongsTo(PemanfaatanSIP::class, 'pemanfaatan_sip_id', 'id');
-    }
+    // public function pemanfaatan_sip() : BelongsTo {
+    //     return $this->belongsTo(PemanfaatanSIP::class, 'pemanfaatan_sip_id', 'id');
+    // }
 }

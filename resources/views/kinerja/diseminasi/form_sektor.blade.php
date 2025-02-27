@@ -2,57 +2,92 @@
 
 @section('content')
     <style>
-        .form-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4x rgba(0,0,0,0.1);
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label { 
-            display: block;
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-family: 'Poppins', sans-serif;
+    }
+    .form-title {
+            text-align: center;
+            font-size: 24px;
             font-weight: bold;
-            margin-bottom: 5px;
             color: #00452c;
+            margin-bottom: 20px;
         }
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .checkbox-group, .radio-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .checkbox-group label, .radio-group label {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-weight: normal;
-        }
-        .form-submit {
-            background-color: #00452c;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .form-submit:hover {
-            background-color: #006400;
-        }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #00452c;
+    }
+    input, select, textarea {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        transition: border-color 0.3s ease;
+    }
+    input:focus, select:focus, textarea:focus {
+        border-color: #00452c;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 69, 44, 0.3);
+    }
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .flex-container label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: normal;
+    }
+    .form-submit {
+        background-color: #00452c;
+        color: #fff;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+    .form-submit:hover {
+        background-color: #006400;
+    }
+    textarea {
+        resize: vertical;
+    }
+    .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Jarak antara kotak checkbox dan teks */
+    font-weight: normal;
+    white-space: nowrap; /* Mencegah teks terpotong ke bawah */
+}
+
     </style>
 
     <form action="{{ route('kinerja.diseminasi.store') }}" method="POST" class="form-container">
         @csrf
+        <div class="form-title">Form Data Diseminasi</div>
+
         <div class="form-group">
             <!-- BBPSIP-->
             <label for="bpsip">BPSIP</label>
@@ -74,6 +109,7 @@
             </select> --}}
             <input type="date" name="tanggal" id="tanggal">
         </div>
+
         <!--SIP-->
         <div class="form-group">
             <label for="sip">Sub Sektor Standar Instrumen Pertanian</label>

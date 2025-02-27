@@ -27,11 +27,13 @@ class PemanfaatanSIPController extends Controller
     }
 
     public function create() {
-        $ip2sip = mIP2SIP::get();
+        $existed_ip2sip = PemanfaatanSIP::distinct()->pluck('id');
+        $ip2sip = mIP2SIP::whereNotIn('id', $existed_ip2sip)->get();
         return view('lp2tp.pemanfaatan.create', [
             'ip2sip' => $ip2sip,
         ]);
     }
+    
 
     public function store(Request $request) {
         $request->validate([
@@ -39,16 +41,9 @@ class PemanfaatanSIPController extends Controller
             'luas_sip' => 'required|numeric',
             'jumlah_sdm' => 'required|numeric',
             'agro_ekosistem' => 'required|string|max:255',
-            'nomor_sertifikat' => 'required|string',
-            'pj_sertifikat' => 'required|string',
-            'pemanfaatan_bangunan' => 'required|array',
-            'pemanfaatan_bangunan.*' => 'required|array',
-            'pemanfaatan_bangunan.*.name' => 'required',
-            'pemanfaatan_bangunan.*.luas' => 'required',
             'pemanfaatan_diseminasi' => 'required|array',
-            'pemanfaatan_diseminasi.*' => 'required|array',
-            'pemanfaatan_diseminasi.*.name' => 'required',
-            'pemanfaatan_diseminasi.*.luas' => 'required',
+            'pemanfaatan_diseminasi.*.name' => 'required|string',
+            'pemanfaatan_diseminasi.*.luas' => 'required|numeric',
         ], [
             'ip2sip_id.required' => 'ID IP2SIP tidak boleh kosong',
             'ip2sip_id.integer' => 'ID IP2SIP harus berupa angka',
@@ -63,42 +58,18 @@ class PemanfaatanSIPController extends Controller
             'nomor_sertifikat.string' => 'Nomor Sertifikat harus bertipe string',
             'pj_sertifikat.required' => 'PJ Sertifikat tidak boleh kosong',
             'pj_sertifikat.string' => 'PJ Sertifikat harus bertipe string',
-            'pemanfaatan_bangunan.required' => 'Pemanfaatan Bangunan tidak boleh kosong',
-            'pemanfaatan_bangunan.array' => 'Pemanfaatan Bangunan harus bertipe array',
-            'pemanfaatan_bangunan.*.name.required' => 'Nama Pemanfaatan bangunan tidak boleh kosong',
-            'pemanfaatan_bangunan.*.luas.required' => 'Luas Pemanfaatan bangunan tidak boleh kosong',
-            'pemanfaatan_bangunan.required' => 'Pemanfaatan Bangunan tidak boleh kosong',
             'pemanfaatan_diseminasi.array' => 'Pemanfaatan Bangunan harus bertipe array',
             'pemanfaatan_diseminasi.*.name.required' => 'Nama Pemanfaatan diseminasi tidak boleh kosong',
             'pemanfaatan_diseminasi.*.luas.required' => 'Luas Pemanfaatan diseminasi tidak boleh kosong',
         ]);
+        // dd($request->pemanfaatan_diseminasi);
         $pemanfaatan_sip = PemanfaatanSIP::create([
             'ip2sip_id' => $request->ip2sip_id,
             'luas_sip' => $request->luas_sip,
             'jumlah_sdm' => $request->jumlah_sdm,
-            'agro_ekosistem' => $request->agro_ekosistem,
-            'nomor_sertifikat' => $request->nomor_sertifikat,
-            'pj_sertifikat' => $request->pj_sertifikat,
+            'agro_ekosistem' => $request->agro_ekosistem
         ]);
-        $pemanfaatan_sip_id = $pemanfaatan_sip->id;
-        $pemanfaatan_bangunan = [];
-        foreach ($request->pemanfaatan_bangunan as $item) {
-            $pemanfaatan_bangunan[] = [
-                'pemanfaatan_sip_id' => $pemanfaatan_sip_id,
-                'name' => $item['name'],
-                'luas' => $item['luas'],
-            ];
-        }
-        $pemanfaatan_diseminasi = [];
-        foreach ($request->pemanfaatan_diseminasi as $item) {
-            $pemanfaatan_diseminasi[] = [
-                'pemanfaatan_sip_id' => $pemanfaatan_sip_id,
-                'name' => $item['name'],
-                'luas' => $item['luas'],
-            ];
-        }
-        DB::table('pemanfaatan_bangunan')->insert($pemanfaatan_bangunan);
-        DB::table('pemanfaatan_diseminasi')->insert($pemanfaatan_diseminasi);
+        $pemanfaatan_sip->pemanfaatan_diseminasi()->createMany($request->pemanfaatan_diseminasi);
         return response()->json(['message' => 'Data berhasil disimpan', 'data' => $pemanfaatan_sip], 201);
     }
 }

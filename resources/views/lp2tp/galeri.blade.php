@@ -104,10 +104,10 @@
     }
 </style>
 
-<h2>Dokumentasi Kegiatan</h2>
+<h2>Profil Kebun Percobaan (IP2SIP)</h2>
 <div class="gallery-container">
     @foreach ($gallery as $gal)
-        <div class="gallery-item" onclick="openModal('{{ $gal->title }}', '{{ $gal->image_url }}', 'Deskripsi kegiatan yang lebih panjang tentang {{ $gal->title }}. Misalnya, ini adalah deskripsi kegiatan yang mencakup tujuan, kegiatan yang dilakukan, hasil yang dicapai, dan dampaknya. Dengan deskripsi ini, pengunjung dapat mengetahui lebih banyak detail terkait kegiatan ini.')">
+        <div class="gallery-item" onclick="openModal('{{ $gal->title }}', '{{ $gal->image_url }}', 'Deskripsi kegiatan yang lebih panjang tentang {{ $gal->title }}. Sejarah singkat asal usul Kebun Percobaan ini berawal dari adanya proyek IDAP (1976-1986) kerjasana Indonesia dengan kerajoon Belanda. Pada tahun 1980 masyarakat petani kop di Aceh Tengah tergantung kehidupannya pada komoditi kopi sementora produksi hanya 500 kg/ hektar dalam setahun. Selain itu mutu kopi juga masih rendah akibat tidak adanya prosesing yang baik sehingga pada tahun 1984 dibangun pabrik prosesing kopi arabika. sengan kapas tas 15 ton kopi glondong nerah perharinya. Hal ini bertujuan untuk meningkatkan kualitas mutu kopi sehinggo meningkatkan pendapatan masyarakat tani sekitarnya. ')">
             <img src="{{ $gal->image_url }}" alt="{{ $gal->title }}">
             <div class="gallery-caption">{{ $gal->title }}</div>
         </div>

@@ -83,7 +83,7 @@
     </style>
 
     <div class="content stylish-content">
-        <h1 class="page-title">Persebaran Instalasi Penelitian dan Pengkajian Teknologi Pertanian Provinsi {{ $bsip->name }}</h1>
+        <h1 class="page-title">Persebaran Instalasi Penelitian dan Pengkajian Teknologi Pertanian <br> Provinsi {{ $bsip->name }}</h1>
 
         <!-- Filter Section -->
         <form id="form-filter" class="filter-container">
@@ -107,7 +107,7 @@
                     <th>No</th>
                     <th>IP2SIP</th>
                     <th>Luas</th>
-                    <th>Agro</th>
+                    <th>Agroekosistem</th>
                     <th>Pemanfaatan</th>
                 </tr>
             </thead>
@@ -117,7 +117,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $ps->ip2sip->name }}</td>
                         <td>{{ $ps->luas_sip }}</td>
-                        <td>{{ $ps->agroekosistem }}</td>
+                        <td>{{ $ps->agro_ekosistem }}</td>
                         <td>---</td>
                     </tr>
                 @endforeach

@@ -348,6 +348,7 @@
             </a>
             <nav class="navbar">
                 <a class="nav-link {{ request()->is('dashboard-lp2tp') ? 'active' : '' }}" href="{{ route('dashboard-lp2tp') }}">Beranda</a>
+                <a class="{{ request()->routeIs('lp2tp.galeri') ? 'active' : '' }}" href="{{ route('lp2tp.galeri') }}">Profil</a>
                 <div class="dropdown">
                     <a class="nav-link {{ request()->routeIs('aset.index') ? 'active' : '' }}" href="#">Aset</a>
                     <div class="dropdown-content">
@@ -359,7 +360,6 @@
                     </div>
                 </div>
                 <a class="{{ request()->routeIs('lp2tp.pemanfaatan_kp') ? 'active' : '' }}" href="{{ route('lp2tp.pemanfaatan_kp') }}">Pemanfaatan KP</a>
-                <a class="{{ request()->routeIs('lp2tp.galeri') ? 'active' : '' }}" href="{{ route('lp2tp.galeri') }}">Galeri</a>
             </nav>
 
             <div>
@@ -387,6 +387,47 @@
     </header>
 
     <div>
+        <div>
+            @if ($errors->any())
+                <button style="
+                    padding: 5px 10px;
+                    color: red;
+                    border: 1px solid red;
+                    border-radius: 5px;
+                    background-color: #efbbbb;
+                    width: 100%;
+                    text-align: start;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: center;
+                " onclick="hideAlert(this)">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </button>
+            @endif
+            @if (session('success'))
+                <button style="
+                    padding: 5px 10px;
+                    color: green;
+                    border: 1px solid green;
+                    border-radius: 5px;
+                    background-color: #bbefbb;
+                    width: 100%;
+                    text-align: start;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: center;
+                " onclick="hideAlert(this)">
+                    {{ session('success') }}
+                </button>
+            @endif
+        </div>
+
         @yield('content')
     </div>
 
@@ -458,5 +499,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        const hideAlert = (e) => {
+            e.style.display = 'none';
+        }
+    </script>
 </body>
 </html>

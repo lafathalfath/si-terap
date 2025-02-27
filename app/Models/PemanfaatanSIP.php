@@ -17,10 +17,6 @@ class PemanfaatanSIP extends Model
         return $this->belongsTo(mIP2SIP::class, 'ip2sip_id', 'id');
     }
 
-    public function pemanfaatan_bangunan() : HasMany {
-        return $this->hasMany(PemanfaatanBangunan::class, 'pemanfaatan_sip_id', 'id');
-    }
-
     public function pemanfaatan_diseminasi() : HasMany {
         return $this->hasMany(PemanfaatanDiseminasi::class, 'pemanfaatan_sip_id', 'id');
     }

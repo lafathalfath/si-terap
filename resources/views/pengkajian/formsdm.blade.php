@@ -74,6 +74,16 @@
                 </select>
             </div>
 
+            <div class="form-group">
+                <label for="jenjang_pendidikan">Jenjang Pendidikan</label>
+                <select id="jenjang_pendidikan" name="jenjang_pendidikan" required>
+                    <option value="" selected disabled>-- Pilih Jenjang Pendidikan --</option>
+                    <option value="SLTA">SLTA</option>
+                    <option value="Diploma">Diploma</option>
+                    <option value="Sarjana">Sarjana</option>
+                    <option value="Magister">Magister</option>
+                </select>
+            </div>
 
             <div class="form-group">
                 <label for="provinsi">Provinsi</label>

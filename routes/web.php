@@ -189,6 +189,7 @@ Route::middleware('authenticated')->group(function () {
         Route::prefix('/pemanfaatan_kp')->group(function () {
             Route::get('/form', [PemanfaatanSIPController::class, 'create'])->name('lp2tp.pemanfaatan_kp.create');
             Route::post('/store', [PemanfaatanSIPController::class, 'store'])->name('lp2tp.pemanfaatan_kp.store');
+            Route::get('/lp2tp/pemanfaatan_kp/export', [PemanfaatanSIPController::class, 'exportExcel'])->name('lp2tp.pemanfaatan_kp.export');
             Route::prefix('/detail')->group(function () {
                 Route::get('/create', [DetailPemanfaatanSipController::class, 'create'])->name('lp2tp.pemanfaatan_kp.detail.create');
                 Route::post('/store', [DetailPemanfaatanSipController::class, 'store'])->name('lp2tp.pemanfaatan_kp.detail.store');
