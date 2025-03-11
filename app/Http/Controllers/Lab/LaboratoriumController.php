@@ -50,6 +50,8 @@ class LaboratoriumController extends Controller
         $request->validate([
             'bsip_id' => 'required|numeric',
             'jenis_lab_id' => 'required|numeric',
+            'langitude' => 'required|string',
+            'latitude' => 'required|string',
             'jenis_analisis' => 'required|string',
             'metode_analisis' => 'required|string',
             'analisis' => 'required|string',
@@ -59,6 +61,8 @@ class LaboratoriumController extends Controller
         ], [
             'bsip_id.required' => 'BSIP tidak boleh kosong',
             'jenis_lab_id.required' => 'Jenis Lab tidak boleh kosong',
+            'langitude.required' => 'Langtitude tidak boleh kosong',
+            'latitude.required' => 'Longtitude tidak boleh kosong',
             'jenis_analisis.required' => 'Jenis Analisis tidak boleh kosong',
             'metode_analisis.required' => 'Metode Analisis tidak boleh kosong',
             'analisis.required' => 'Analisis tidak boleh kosong',
@@ -69,6 +73,8 @@ class LaboratoriumController extends Controller
         $lab = Laboratorium::create([
             'bsip_id' => $request->bsip_id,
             'jenis_lab_id' => $request->jenis_lab_id,
+            'langitude' => $request->langitude,
+            'latitude' => $request->latitude,
             'jenis_analisis' => $request->jenis_analisis,
             'metode_analisis' => $request->metode_analisis,
             'analisis' => $request->analisis,

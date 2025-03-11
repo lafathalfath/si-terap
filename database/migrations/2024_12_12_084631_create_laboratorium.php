@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('bsip_id');
             $table->unsignedBigInteger('jenis_lab_id');
+            $table->string('langitude');
+            $table->string('latitude');
             $table->string('jenis_analisis');
             $table->text('metode_analisis');
             $table->text('analisis');

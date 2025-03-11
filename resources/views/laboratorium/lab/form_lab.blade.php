@@ -100,6 +100,16 @@
                     @endforeach
                 </select>
             </div>
+            
+            <!-- Bagian coords -->
+            <div class="form-group">
+                <label for="langitude">Langitude</label>
+                <input type="text" name="langitude" id="langitude" placeholder="Masukkan langitude" required>
+            </div>
+            <div class="form-group">
+                <label for="latitude">Latitude</label>
+                <input type="text" name="latitude" id="latitude" placeholder="Masukkan latitude" required>
+            </div>
 
             <!-- Ruang Lingkup Analisis -->
             <div class="form-section-title">Ruang Lingkup Analisis</div>

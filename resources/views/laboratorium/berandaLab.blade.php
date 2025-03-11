@@ -184,14 +184,38 @@ var provinces = [
     { id: 10, name: "Papua", coords: [-4.269928, 138.080353] }
 ];
 
-// Add markers for each city with popups and redirect using ID
-provinces.forEach(province => {
-    var marker = L.marker(province.coords).addTo(map);
-    marker.bindPopup(`<b>${province.name}</b><br><a href='/lab-pengujian/laboratoriumview/${province.id}'>Lihat Detail</a>`);
+ var provinces = @json($lab);
+// var provinces = labs.map((l, index) => ({
+//     id: l.id ?? (index + 1), // Pakai ID dari database jika ada
+//     name: l.bsip ? l.bsip.name : "Unknown", // Cek jika `bsip` ada, jika tidak beri "Unknown"
+//     coords: [
+//         l.latitude ? parseFloat(l.latitude) : 0, 
+//         l.langitude ? parseFloat(l.langitude) : 0
+//     ], // Pastikan angka dalam format float
+// }));
 
-    // marker.on('click', function() {
-    //     window.location.href = `/lab-pengujian/laboratoriumview/${province.id}`;
-    // });
+
+// Add markers for each city with popups and redirect using ID
+// provinces.forEach(province => {
+//     console.log(province)
+//     var marker = L.marker(province.coords).addTo(map);
+//     marker.bindPopup(`<b>${province.name}</b><br><a href='/lab-pengujian/laboratoriumview/${province.id}'>Lihat Detail</a>`);
+
+//     marker.on('click', function() {
+//         // window.location.href = `/lab-pengujian/laboratoriumview/${province.id}`;
+//     });
+// });
+
+provinces.forEach(lab => {
+    console.log(lab); // Menampilkan data lab di console
+
+    if (lab.latitude && lab.langitude) {
+        console.log("ok")
+        var marker = L.marker([parseFloat(lab.latitude), parseFloat(lab.langitude)]).addTo(map);
+        console.log(marker)
+        console.log(map)
+        marker.bindPopup(`<b>${lab.bsip ? lab.bsip.name : 'Unknown'}</b><br><a href='/lab-pengujian/laboratoriumview/${lab.id}'>Lihat Detail</a>`);
+    }
 });
 
     </script>
