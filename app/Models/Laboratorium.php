@@ -17,6 +17,9 @@ class Laboratorium extends Model
     }
 
     public function jenis_lab() : BelongsTo {
-        return $this->belongsTo(mJenisLab::class, 'bsip_id', 'id');
+        return $this->belongsTo(mJenisLab::class, 'jenis_lab_id', 'id');
     }
+
+    
 }
+

@@ -77,7 +77,7 @@
 
     <div class="form-container">
         <h2 class="form-title">Form Data Laboratorium</h2>
-        <form action="{{ route('lab.store') }}" method="POST">
+        <form action="{{ route('lab.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <!-- Bagian Nama BPSIP -->
             <div class="form-group">
@@ -103,12 +103,12 @@
             
             <!-- Bagian coords -->
             <div class="form-group">
-                <label for="langitude">Langitude</label>
-                <input type="text" name="langitude" id="langitude" placeholder="Masukkan langitude" required>
-            </div>
-            <div class="form-group">
                 <label for="latitude">Latitude</label>
                 <input type="text" name="latitude" id="latitude" placeholder="Masukkan latitude" required>
+            </div>
+            <div class="form-group">
+                <label for="longitude">Longitude</label>
+                <input type="text" name="longitude" id="longitude" placeholder="Masukkan longitude" required>
             </div>
 
             <!-- Ruang Lingkup Analisis -->

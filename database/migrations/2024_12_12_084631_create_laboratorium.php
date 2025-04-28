@@ -15,14 +15,22 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('bsip_id');
             $table->unsignedBigInteger('jenis_lab_id');
-            $table->string('langitude');
+            $table->string('longitude');
             $table->string('latitude');
-            $table->string('jenis_analisis');
+            $table->text('jenis_analisis');
             $table->text('metode_analisis');
             $table->text('analisis');
             $table->text('kompetensi_personal');
-            $table->string('nama_pelatihan');
+            $table->text('nama_pelatihan');
             $table->year('tahun');
+            $table->string('masa_berlaku');
+            $table->string('no_akreditasi');
+            $table->integer('jumlah_gedung');
+            $table->enum('gedung_memadai', ['Ya', 'Tidak']);
+            $table->text('jenis_peralatan');
+            $table->string('foto_lab');
+            $table->text('alamat_lab');
+            $table->string('telepon_lab');
             $table->timestamps();
 
             $table->foreign('bsip_id')->references('id')->on('m_bsip');

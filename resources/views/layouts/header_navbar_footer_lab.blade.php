@@ -298,6 +298,7 @@
             <nav class="navbar">
                 <a class="nav-link {{ request()->is('beranda-Lab') ? 'active' : '' }}" href="{{ route('beranda-Lab') }}">Beranda</a>
                 <a class="nav-link {{ request()->routeIs('data-Lab') ? 'active' : '' }}" href="{{ route('data-Lab') }}">Laboratorium</a>
+                <a class="nav-link {{ request()->routeIs('jadwal.jadwal_lab') ? 'active' : '' }}" href="{{ route('jadwal.jadwal_lab') }}">Jadwal Laboratorium</a>
             </nav>
             <div>
                 @if (auth()->user())
