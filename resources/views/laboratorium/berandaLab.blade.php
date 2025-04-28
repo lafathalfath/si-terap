@@ -171,27 +171,51 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // Example markers in Jawa Barat
-var provinces = [
-    { id: 1, name: "Aceh", coords: [4.695135, 96.749397] },
-    { id: 2, name: "Sumatera Utara", coords: [3.585242, 98.675598] },
-    { id: 3, name: "Sumatera Barat", coords: [-0.789275, 100.650558] },
-    { id: 4, name: "Riau", coords: [0.507068, 101.447777] },
-    { id: 5, name: "Jawa Barat", coords: [-6.917464, 107.619125] },
-    { id: 6, name: "Jawa Tengah", coords: [-7.566298, 110.831787] },
-    { id: 7, name: "Jawa Timur", coords: [-7.250445, 112.768845] },
-    { id: 8, name: "Kalimantan Timur", coords: [-0.502106, 117.153709] },
-    { id: 9, name: "Sulawesi Selatan", coords: [-5.147665, 119.432732] },
-    { id: 10, name: "Papua", coords: [-4.269928, 138.080353] }
-];
+// var provinces = [
+//     { id: 1, name: "Aceh", coords: [4.695135, 96.749397] },
+//     { id: 2, name: "Sumatera Utara", coords: [3.585242, 98.675598] },
+//     { id: 3, name: "Sumatera Barat", coords: [-0.789275, 100.650558] },
+//     { id: 4, name: "Riau", coords: [0.507068, 101.447777] },
+//     { id: 5, name: "Jawa Barat", coords: [-6.917464, 107.619125] },
+//     { id: 6, name: "Jawa Tengah", coords: [-7.566298, 110.831787] },
+//     { id: 7, name: "Jawa Timur", coords: [-7.250445, 112.768845] },
+//     { id: 8, name: "Kalimantan Timur", coords: [-0.502106, 117.153709] },
+//     { id: 9, name: "Sulawesi Selatan", coords: [-5.147665, 119.432732] },
+//     { id: 10, name: "Papua", coords: [-4.269928, 138.080353] }
+// ];
+
+ var provinces = @json($lab);
+// var provinces = labs.map((l, index) => ({
+//     id: l.id ?? (index + 1), // Pakai ID dari database jika ada
+//     name: l.bsip ? l.bsip.name : "Unknown", // Cek jika `bsip` ada, jika tidak beri "Unknown"
+//     coords: [
+//         l.latitude ? parseFloat(l.latitude) : 0, 
+//         l.langitude ? parseFloat(l.langitude) : 0
+//     ], // Pastikan angka dalam format float
+// }));
+
 
 // Add markers for each city with popups and redirect using ID
-provinces.forEach(province => {
-    var marker = L.marker(province.coords).addTo(map);
-    marker.bindPopup(`<b>${province.name}</b><br><a href='/lab-pengujian/laboratoriumview/${province.id}'>Lihat Detail</a>`);
+// provinces.forEach(province => {
+//     console.log(province)
+//     var marker = L.marker(province.coords).addTo(map);
+//     marker.bindPopup(`<b>${province.name}</b><br><a href='/lab-pengujian/laboratoriumview/${province.id}'>Lihat Detail</a>`);
 
-    // marker.on('click', function() {
-    //     window.location.href = `/lab-pengujian/laboratoriumview/${province.id}`;
-    // });
+//     marker.on('click', function() {
+//         // window.location.href = `/lab-pengujian/laboratoriumview/${province.id}`;
+//     });
+// });
+
+provinces.forEach(lab => {
+    console.log(lab); // Menampilkan data lab di console
+
+    if (lab.longitude && lab.latitude) {
+        console.log("ok")
+        var marker = L.marker([parseFloat(lab.latitude), parseFloat(lab.longitude)]).addTo(map);
+        console.log(marker)
+        console.log(map)
+        marker.bindPopup(`<b>${lab.bsip ? lab.bsip.name : 'Unknown'}</b><br><a href='/lab-pengujian/laboratoriumview/${lab.id}'>Lihat Detail</a>`);
+    }
 });
 
     </script>

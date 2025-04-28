@@ -30,6 +30,7 @@ use App\Http\Controllers\IP2SIP\AsetRumahController;
 use App\Http\Controllers\IP2SIP\AsetTanahController;
 use App\Http\Controllers\IP2SIP\DetailPemanfaatanSipController;
 use App\Http\Controllers\IP2SIP\PemanfaatanSIPController;
+use App\Http\Controllers\Lab\DaftarController;
 use App\Http\Controllers\Lab\LaboratoriumController;
 use App\Http\Controllers\Manage\AdminDashboardController;
 use App\Http\Controllers\Manage\BsipProfileController;
@@ -174,10 +175,12 @@ Route::middleware('authenticated')->group(function () {
         Route::post('/', [LaboratoriumController::class, 'store'])->name('lab.store');
         Route::put('/{id}', [LaboratoriumController::class, 'update'])->name('lab.update');
         Route:: delete('/{id}', [LaboratoriumController::class, 'destroy'])->name('lab.destroy');
-        Route::get('/laboratoriumview/{id}', [LaboratoriumController::class, 'showDetail'])->name('lab.detail');
-        
+       
+        Route::get('/lab-pengujian/form_daftar/{id}', [LaboratoriumController::class, 'showFormId'])->name('jadwal.form_daftar');
+        Route::post('/daftar', [DaftarController::class, 'store'])->name('daftar.store');
+        //error karena route post daftar jadwal dan form bentrok
     });
-
+    
     Route::middleware(['service:3', 'lock_service:3'])->prefix('/perbenihan')->group(function () {
         Route::get('/form', [PerbenihanController::class, 'create'])->name('perbenihan.form');
         Route::post('/', [PerbenihanController::class, 'store'])->name('perbenihan.store');
@@ -270,6 +273,9 @@ Route::prefix('/kinerja-kegiatan')->middleware('lock_service:1')->group(function
 Route::prefix('/lab-pengujian')->middleware('lock_service:2')->group(function () {
     Route::get('/', [LaboratoriumController::class, 'index'])->name('beranda-Lab');
     Route::get('/data-Lab', [LaboratoriumController::class, 'show'])->name('data-Lab');
+    Route::get('/laboratoriumview/{id}', [LaboratoriumController::class, 'showDetail'])->name('lab.detail');
+    Route::get('/jadwal-Lab', [LaboratoriumController::class, 'jadwalLab'])->name('jadwal.jadwal_lab');
+
 });
 // (2) END LAB PENGUJIAN
 // (3) PERBENIHAN
