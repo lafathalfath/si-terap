@@ -80,6 +80,39 @@
             background-color: #006633;
         }
 
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: white;
+            font-size: 0.9em;
+        }
+
+        .btn-primary {
+            background-color: #006633;
+        }
+
+        .btn-warning {
+            background-color: #FFC107;
+        }
+
+        .btn-danger {
+            background-color: #DC3545;
+        }
+
+        .btn-info {
+            background-color: #17A2B8;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
     </style>
 
     <div class="content stylish-content">
@@ -100,156 +133,68 @@
                     <option value="{{ $i }}" {{ request()->tahun == $i ? 'selected' : '' }}>{{ $i }}</option>
                 @endfor
             </select>
+            
 
             <button type="submit">Filter</button>
         </form>
 
-        <!-- Kegiatan Table -->
-<div style="display: flex; align-items: center; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
-    <div style="display: flex; flex-direction: column; gap: 5px;">
-        <h2 style="margin: 0;">Data Lab</h2>
-        <span style="color: #666; font-size: 14px;">Informasi terkait laboratorium</span>
-    </div>
-    <a href="{{ route('form-Lab') }}" class="stylish-button" style="text-decoration: none; color: #fff; background-color: #00452C; padding: 10px 15px; border-radius: 5px; justify-content: space-between;">
-        Isi Data Lab
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 20px;">
+            <div style="display: flex; flex-direction: column; gap: 5px;">
+                <h2 style="margin: 0;">Data Lab</h2>
+                <span style="color: #666; font-size: 14px;">Informasi terkait laboratorium</span>
+            </div>
+            <a href="{{ route('form-Lab') }}" class="stylish-button" style="text-decoration: none; color: #fff;">
+                Tambah Data Lab
+            </a>
+        </div>
+
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <table border="1" id="kegiatan-table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama BPSIP</th>
+                    <th>Jenis Laboratorium</th>
+                    <th>Masa Berlaku</th>
+                    <th>No Akreditasi</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($lab as $l)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $l->bsip->name }}</td>
+                        <td>{{ $l->jenis_lab->name }}</td>
+                        <td>{{ $l->masa_berlaku }}</td>
+                        <td>{{ $l->no_akreditasi}}</td>
+                        
+                        <td class="action-buttons">
+                        <a href="{{ route('labs.kegiatan.index', ['lab' => $l->id]) }}" class="btn btn-info">
+        <i class="fas fa-calendar-alt"></i> Lihat Kegiatan Lab
     </a>
-</div>
-
-<table border="1" id="kegiatan-table">
-  <thead>
-    <tr>
-      <th rowspan="3">No</th>
-      <th rowspan="3">Nama BPSIP</th>
-      <th rowspan="3">Jenis Laboratorium</th>
-      <th colspan="2">Ruang Lingkup Analisis</th>
-      <th colspan="4">Dukungan SDM Laboratorium</th>
-    </tr>
-    <tr>
-      <th rowspan="2">Jenis Analisis</th>
-      <th rowspan="2">Metode Analisis</th>
-      <th rowspan="2">Analisis</th>
-      <th rowspan="2">Kompetensi Personal</th>
-      <th colspan="2">Pelatihan</th>
-    </tr>
-    <tr>
-      <th>Nama/Jenis</th>
-      <th>Waktu</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach ($lab as $l)
-        <tr>
-            <td>{{ $loop->iteration }}</td>
-            <td>{{ $l->bsip->name }}</td>
-            <td>{{ $l->jenis_lab->name }}</td>
-            <td>{{ $l->jenis_analisis }}</td>
-            <td>{{ $l->metode_analisis }}</td>
-            <td>{{ $l->analisis }}</td>
-            <td>{{ $l->kompetensi_personal }}</td>
-            <td>{{ $l->nama_pelatihan }}</td>
-            <td>{{ $l->tahun }}</td>
-        </tr>
-    @endforeach
-  </tbody>
-</table>
-
-<script>
-    // Data kegiatan (dummy data)
-    // const kegiatanData = [
-    //         {
-    //     no: 1,
-    //     bpsip: "BPSIP SUMSEL",
-    //     jenisLab: "Laboratorium Pengujian Kimia Tanah dan Mutu Beras",
-    //     jenisAnalisis: "Analisa Kimia Tanah Rutin dan Analisa Mutu Beras",
-    //     metodeAnalisis: "Kolorimetri/Pewarnaan",
-    //     analisis: "Tidak ada",
-    //     kompetensiPersonal: "Belum ada",
-    //     namaPelatihan: "Pelatihan Pemahaman SNI ISO/IEC 17025:2017",
-    //     waktu: "2023"
-    // },
-    // {
-    //     no: 2,
-    //     bpsip: "BPSIP JAWA BARAT",
-    //     jenisLab: "Laboratorium Analisa Pupuk",
-    //     jenisAnalisis: "Analisa Nitrogen dan Fosfat",
-    //     metodeAnalisis: "Spektrofotometri dan Titrasi",
-    //     analisis: "Nitrogen total, Fosfat total",
-    //     kompetensiPersonal: "Ada",
-    //     namaPelatihan: "Pelatihan Analisa Pupuk dan Tanah",
-    //     waktu: "2022"
-    // },
-    // {
-    //     no: 3,
-    //     bpsip: "BPSIP JAWA TIMUR",
-    //     jenisLab: "Laboratorium Mutu Pangan",
-    //     jenisAnalisis: "Analisa Kimia Pangan",
-    //     metodeAnalisis: "Kromatografi Gas dan Cair",
-    //     analisis: "Kadar Air, Protein, Lemak, dan Karbohidrat",
-    //     kompetensiPersonal: "Tidak ada",
-    //     namaPelatihan: "Pelatihan Penerapan ISO 17025",
-    //     waktu: "2021"
-    // },
-    // {
-    //     no: 4,
-    //     bpsip: "BPSIP SUMATERA BARAT",
-    //     jenisLab: "Laboratorium Uji Sampel Air",
-    //     jenisAnalisis: "Analisa Parameter Fisika dan Kimia Air",
-    //     metodeAnalisis: "Spektrofotometri, TDS, dan pH Meter",
-    //     analisis: "TSS, COD, BOD, dan pH",
-    //     kompetensiPersonal: "Ada",
-    //     namaPelatihan: "Pelatihan Pengendalian Mutu Air",
-    //     waktu: "2023"
-    // },
-    // {
-    //     no: 5,
-    //     bpsip: "BPSIP KALIMANTAN TENGAH",
-    //     jenisLab: "Laboratorium Uji Kesuburan Tanah",
-    //     jenisAnalisis: "Analisa Unsur Hara Makro dan Mikro",
-    //     metodeAnalisis: "Titrasi dan Spektrofotometri",
-    //     analisis: "Nitrogen, Fosfat, Kalium, Magnesium, dan Kalsium",
-    //     kompetensiPersonal: "Ada",
-    //     namaPelatihan: "Workshop Penilaian Kesuburan Tanah",
-    //     waktu: "2020"
-    // }
-    //     ];
-
-    //     function filterData() {
-    //         const bpsip = document.getElementById('bpsip').value;
-    //         const year = document.getElementById('year').value;
-    //         const sipType = document.getElementById('sip-type').value;
-
-    //         const filteredData = kegiatanData.filter(item => {
-    //             return (
-    //                 (bpsip === '' || item.bpsip === bpsip) &&
-    //                 (year === '' || item.tahun === parseInt(year)) &&
-    //                 (sipType === '' || item.type === sipType)
-    //             );
-    //         });
-
-    //         displayData(filteredData);
-    //     }
-
-    //     function displayData(data) {
-    //         const tableBody = document.querySelector('#kegiatan-table tbody');
-    //         tableBody.innerHTML = ''; 
-
-    //         data.forEach(item => {
-    //             const row = document.createElement('tr');
-    //             row.innerHTML = `
-    //                 <td>${item.no}</td>
-    //                 <td>${item.bpsip}</td>
-    //                 <td>${item.jenisLab}</td>
-    //                 <td>${item.jenisAnalisis}</td>
-    //                 <td>${item.metodeAnalisis}</td>
-    //                 <td>${item.analisis}</td>
-    //                 <td>${item.kompetensiPersonal}</td>
-    //                 <td>${item.namaPelatihan}</td>
-    //                 <td>${item.waktu}</td>
-    //             `;
-    //             tableBody.appendChild(row);
-    //         });
-    //     }
-
-    //     displayData(kegiatanData);
-</script>
+                            <a href="{{ route('lab.detail', $l->id) }}" class="btn btn-primary">
+                                <i class="fas fa-eye"></i> Detail
+                            </a>
+                            <a href="{{ route('lab.edit', Crypt::encryptString($l->id)) }}" class="btn btn-warning">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <form action="{{ route('lab.destroy', Crypt::encryptString($l->id)) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection

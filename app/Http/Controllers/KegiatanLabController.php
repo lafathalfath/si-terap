@@ -20,8 +20,7 @@ class KegiatanLabController extends Controller
     public function index(Laboratorium $lab)
     {
         $kegiatans = $lab->kegiatanLabs()->latest()->get();
-        return view('laboratorium.lab.detail', compact('lab', 'kegiatans'));
-        
+        return view('laboratorium.kegiatan_labs.index', compact('lab', 'kegiatans'));
         
     }
 

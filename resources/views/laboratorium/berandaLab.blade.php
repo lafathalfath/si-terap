@@ -124,11 +124,14 @@
       <th rowspan="3">No</th>
       <th rowspan="3">Nama BPSIP</th>
       <th rowspan="3">Jenis Laboratorium</th>
+      <th colspan="2">Akreditasi</th>
       <th colspan="2">Ruang Lingkup Analisis</th>
       <th colspan="4">Dukungan SDM Laboratorium</th>
     </tr>
     <tr>
-      <th rowspan="2">Jenis Analisis</th>
+        <th rowspan="2">Masa Berlaku</th>
+        <th rowspan="2">No Akreditasi</th>
+        <th rowspan="2">Jenis Analisis</th>
       <th rowspan="2">Metode Analisis</th>
       <th rowspan="2">Analisis</th>
       <th rowspan="2">Kompetensi Personal</th>
@@ -145,6 +148,8 @@
             <td>{{ $loop->iteration }}</td>
             <td>{{ $l->bsip->name }}</td>
             <td>{{ $l->jenis_lab->name }}</td>
+            <td>{{ \Carbon\Carbon::parse($l->masa_berlaku)->translatedFormat('j F Y') }}</td>
+            <td>{{ $l->no_akreditasi }}</td>
             <td>{{ $l->jenis_analisis }}</td>
             <td>{{ $l->metode_analisis }}</td>
             <td>{{ $l->analisis }}</td>

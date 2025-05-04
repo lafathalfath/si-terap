@@ -24,7 +24,8 @@ class LaboratoriumController extends Controller
             'lab' => $lab,
             'bsip' => $bsip,
         ]);
-    }
+
+        }
 
     public function show(Request $request) {
         $lab = new Laboratorium();
@@ -39,6 +40,9 @@ class LaboratoriumController extends Controller
             'bsip' => $bsip,
         ]);
     }
+
+     
+     
     public function jadwalLab(Request $request) {
         $lab = new Laboratorium();
         $lab = $lab->with(['bsip', 'jenis_lab']);
@@ -78,7 +82,7 @@ class LaboratoriumController extends Controller
             'kompetensi_personal' => 'required|string',
             'nama_pelatihan' => 'required|string',
             'tahun' => 'required|numeric',
-            'masa_berlaku' => 'required|string',
+            'masa_berlaku' => 'required|date',
             'no_akreditasi' => 'required|string',
             'jumlah_gedung' => 'required|integer',
             'gedung_memadai' => 'required|in:Ya,Tidak',
@@ -137,6 +141,23 @@ class LaboratoriumController extends Controller
         return redirect()->route('data-Lab')->with('success', 'created');
     }
 
+    public function edit($id)
+{
+   // Ambil data laboratorium berdasarkan id yang diterima
+   $lab = Laboratorium::find(Crypt::decryptString($id));
+   // Jika laboratorium tidak ditemukan, kembali ke halaman sebelumnya dengan error
+   if (!$lab) {
+       return back()->withErrors('Data tidak ditemukan');
+   }
+   $bsip = mBSIP::select(['id', 'name'])->get();
+        $jenis_lab = mJenisLab::select(['id', 'name'])->get();
+        return view('laboratorium.lab.edit', [
+            'lab' => $lab,
+            'bsip' => $bsip,
+            'jenis_lab' => $jenis_lab,
+        ]);
+        
+}
     public function update($id, Request $request) {
         $lab = Laboratorium::find(Crypt::decryptString($id));
         if (!$lab) return back()->withErrors('data not found');
@@ -151,12 +172,12 @@ class LaboratoriumController extends Controller
             'kompetensi_personal' => 'required|string',
             'nama_pelatihan' => 'required|string',
             'tahun' => 'required|numeric',
-            'masa_berlaku' => 'required|string',
+            'masa_berlaku' => 'required|date',
             'no_akreditasi' => 'required|string',
             'jumlah_gedung' => 'required|integer',
             'gedung_memadai' => 'required|in:Ya,Tidak',
             'jenis_peralatan' => 'required|string',
-            'foto_lab' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'foto_lab' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'alamat_lab' => 'required|string',
             'telepon_lab' => 'required|string',
         ], [
@@ -179,6 +200,13 @@ class LaboratoriumController extends Controller
             'alamat_lab.required' => 'Alamat Lab tidak boleh kosong',
             'telepon_lab.required' => 'Telepon Lab tidak boleh kosong',
         ]);
+// Handle upload foto
+            $path = $lab->foto_lab; // default pakai foto lama
+            if ($request->hasFile('foto_lab')) {
+                $file = $request->file('foto_lab');
+                $path = $file->store('lab-images', 'public');
+            }
+
         $lab = $lab->update([
             'bsip_id' => $request->bsip_id,
             'jenis_lab_id' => $request->jenis_lab_id,
@@ -195,11 +223,11 @@ class LaboratoriumController extends Controller
             'jumlah_gedung' => $request -> jumlah_gedung,
             'gedung_memadai' => $request -> gedung_memadai,
             'jenis_peralatan' => $request -> jenis_peralatan,
-            'foto_lab' => $request -> foto_lab,
+            'foto_lab' => $path,
             'alamat_lab' => $request ->  alamat_lab,
             'telepon_lab' => $request -> telepon_lab,
         ]);
-        
+     
         if (!$lab) return back()->withErrors('failed to update data');
         return redirect()->route('data-Lab')->with('success', 'updated');
     }
@@ -208,7 +236,7 @@ class LaboratoriumController extends Controller
         $lab = Laboratorium::find(Crypt::decryptString($id));
         if (!$lab) return back()->withErrors('data not found');
         $lab->delete();
-        if ($lab) return back()->withErrors('failed to delete data');
+
         return redirect()->route('data-Lab')->with('success', 'deleted');
     }
 
@@ -218,7 +246,7 @@ class LaboratoriumController extends Controller
         // return view('laboratorium.lab.detail', compact('lab'));
         $lab = Laboratorium::find($id);
         $kegiatans = $lab->kegiatanLabs()->latest()->get();
-    // dd($lab); // Debugging
+
     return view('laboratorium.lab.detail', compact('lab', 'kegiatans'));
     }
     public function showFormId($id) {
@@ -226,7 +254,7 @@ class LaboratoriumController extends Controller
         // // if (!$lab) return back()->withErrors('data not found');
         // return view('laboratorium.lab.detail', compact('lab'));
         $lab = Laboratorium::find($id);
-    // dd($lab); // Debugging
+
     return view('laboratorium.jadwal.form_daftar', compact('lab'));
     }
 

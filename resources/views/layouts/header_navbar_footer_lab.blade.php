@@ -345,23 +345,7 @@
                     </ul>
                 </button>
             @endif
-            @if (session('success'))
-                <button style="
-                    padding: 5px 10px;
-                    color: green;
-                    border: 1px solid green;
-                    border-radius: 5px;
-                    background-color: #bbefbb;
-                    width: 100%;
-                    text-align: start;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-start;
-                    justify-content: center;
-                " onclick="hideAlert(this)">
-                    {{ session('success') }}
-                </button>
-            @endif
+            
         </div>
 
         @yield('content')

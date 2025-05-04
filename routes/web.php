@@ -174,6 +174,7 @@ Route::middleware('authenticated')->group(function () {
     Route::middleware(['service:2', 'lock_service:2'])->prefix('/lab-pengujian')->group(function () {
         Route::get('/form', [LaboratoriumController::class, 'create'])->name('form-Lab');
         Route::post('/', [LaboratoriumController::class, 'store'])->name('lab.store');
+        Route::get('/{id}/edit', [LaboratoriumController::class, 'edit'])->name('lab.edit');
         Route::put('/{id}', [LaboratoriumController::class, 'update'])->name('lab.update');
         Route:: delete('/{id}', [LaboratoriumController::class, 'destroy'])->name('lab.destroy');
         Route::get('/lab-pengujian/form_daftar/{id}', [LaboratoriumController::class, 'showFormId'])->name('jadwal.form_daftar');
