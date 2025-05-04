@@ -217,8 +217,9 @@ class LaboratoriumController extends Controller
         // // if (!$lab) return back()->withErrors('data not found');
         // return view('laboratorium.lab.detail', compact('lab'));
         $lab = Laboratorium::find($id);
+        $kegiatans = $lab->kegiatanLabs()->latest()->get();
     // dd($lab); // Debugging
-    return view('laboratorium.lab.detail', compact('lab'));
+    return view('laboratorium.lab.detail', compact('lab', 'kegiatans'));
     }
     public function showFormId($id) {
         // $lab = Laboratorium::findOrFail($id);

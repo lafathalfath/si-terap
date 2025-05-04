@@ -30,6 +30,7 @@ use App\Http\Controllers\IP2SIP\AsetRumahController;
 use App\Http\Controllers\IP2SIP\AsetTanahController;
 use App\Http\Controllers\IP2SIP\DetailPemanfaatanSipController;
 use App\Http\Controllers\IP2SIP\PemanfaatanSIPController;
+use App\Http\Controllers\KegiatanLabController;
 use App\Http\Controllers\Lab\DaftarController;
 use App\Http\Controllers\Lab\LaboratoriumController;
 use App\Http\Controllers\Manage\AdminDashboardController;
@@ -175,11 +176,20 @@ Route::middleware('authenticated')->group(function () {
         Route::post('/', [LaboratoriumController::class, 'store'])->name('lab.store');
         Route::put('/{id}', [LaboratoriumController::class, 'update'])->name('lab.update');
         Route:: delete('/{id}', [LaboratoriumController::class, 'destroy'])->name('lab.destroy');
-       
         Route::get('/lab-pengujian/form_daftar/{id}', [LaboratoriumController::class, 'showFormId'])->name('jadwal.form_daftar');
         Route::post('/daftar', [DaftarController::class, 'store'])->name('daftar.store');
-        //error karena route post daftar jadwal dan form bentrok
+        Route::get('/data-Lab', [LaboratoriumController::class, 'show'])->name('data-Lab');
+        Route::prefix('/{lab}/kegiatan')->name('labs.kegiatan.')->group(function () {
+            Route::get('/', [KegiatanLabController::class, 'index'])->name('index');
+            Route::get('/create', [KegiatanLabController::class, 'create'])->name('create');
+            Route::post('/', [KegiatanLabController::class, 'store'])->name('store');
+
+            Route::get('/{kegiatan}/edit', [KegiatanLabController::class, 'edit'])->name('edit');
+            Route::put('/{kegiatan}', [KegiatanLabController::class, 'update'])->name('update');
+            Route::delete('/{kegiatan}', [KegiatanLabController::class, 'destroy'])->name('destroy');
+        });
     });
+    
     
     Route::middleware(['service:3', 'lock_service:3'])->prefix('/perbenihan')->group(function () {
         Route::get('/form', [PerbenihanController::class, 'create'])->name('perbenihan.form');
@@ -272,9 +282,9 @@ Route::prefix('/kinerja-kegiatan')->middleware('lock_service:1')->group(function
 // (2) LAB PENGUJIAN
 Route::prefix('/lab-pengujian')->middleware('lock_service:2')->group(function () {
     Route::get('/', [LaboratoriumController::class, 'index'])->name('beranda-Lab');
-    Route::get('/data-Lab', [LaboratoriumController::class, 'show'])->name('data-Lab');
     Route::get('/laboratoriumview/{id}', [LaboratoriumController::class, 'showDetail'])->name('lab.detail');
     Route::get('/jadwal-Lab', [LaboratoriumController::class, 'jadwalLab'])->name('jadwal.jadwal_lab');
+    Route::get('/lab-pengujian/{lab}/kegiatan/{kegiatan}', [KegiatanLabController::class, 'show'])->name('labs.kegiatan.show');
 
 });
 // (2) END LAB PENGUJIAN

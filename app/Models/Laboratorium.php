@@ -20,6 +20,9 @@ class Laboratorium extends Model
         return $this->belongsTo(mJenisLab::class, 'jenis_lab_id', 'id');
     }
 
-    
+    public function kegiatanLabs()
+{
+    return $this->hasMany(KegiatanLab::class, 'laboratorium_id');
+}
 }
 

@@ -155,6 +155,7 @@
     @endforeach
   </tbody>
 </table>
+
     </div>
 
     <!-- Add Leaflet JS after the map -->
